@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<main class="mt-5 pt-4">
+  <div class="container wow fadeIn">
+    <h2 class="my-5 h2 text-center">Checkout form</h2>
+    <div class="row">
+      <div class="col-md-8 mb-4">
+        <div class="card">
+<!-- 
+          <form action="" method="POST">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type="submit" class="btn btn-info">Submit</button>
+          </form> -->
+
+
+          <form class="card-body" method="POST">
+            {% csrf_token %}
+            <div class="md-form mb-5">
+              <input type="text" name="street_address" id="street_address" class="form-control" placeholder="1234 Main St" required>
+              <label for="street_address" class="">Street address</label>
+            </div>
+            <div class="md-form mb-5">
+              <input type="text" name="apartment_address" id="apartment_address" class="form-control" placeholder="Apartment or suite" required>
+              <label for="apartment_address" class="">Apartment address</label>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-4 col-md-12 mb-4">
+                <label for="country">Country</label>
+                {{form.country}}
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 mb-4">
+                <label for="zip">Zip</label>
+                <input type="text" name="zip" class="form-control" id="zip" placeholder="Zipcode..." >
+                <div class="invalid-feedback">
+                  Zip code required.
+                </div>
+              </div>
+            </div>
+            <hr>
+            <!-- <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="save_info" class="custom-control-input" id="save_info">
+              <label class="custom-control-label" for="save_info">Save as default address</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" name="use_default" class="custom-control-input" id="use_default">
+              <label class="custom-control-label" for="use_default">Use default address : {{address.street_address}}, {{address.apartment_address}}, {{address.country}}</label>
+            </div>
+            <hr> -->
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="stripe" value="S" name="payment_option" type="radio" class="custom-control-input">
+                <label class="custom-control-label" for="stripe">Stripe</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="paypal" value="P" name="payment_option" type="radio" class="custom-control-input">
+                <label class="custom-control-label" for="paypal">Paypal</label>
+              </div>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to Payment</button>
+          </form>
+        </div>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-md-4 mb-4">
+        {% include "snippet.html" %}
+      </div>
+    </div>
+  </div>
+</main> 
+
+{% endblock content %}
+  
+ 
