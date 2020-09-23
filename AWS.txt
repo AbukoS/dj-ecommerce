@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+<CORSRule>
+    <AllowedOrigin>*</AllowedOrigin>
+    <AllowedMethod>GET</AllowedMethod>
+    <AllowedMethod>HEAD</AllowedMethod>
+    <AllowedMethod>DELETE</AllowedMethod>
+    <AllowedMethod>POST</AllowedMethod>
+    <AllowedMethod>PUT</AllowedMethod>
+    <AllowedHeader>*</AllowedHeader>
+</CORSRule>
+</CORSConfiguration>
+
+{
+    "Version": "2012-10-17",
+    "Id": "http referer policy",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::<bucketname>/*"
+        }
+    ]
+}
+
+
+{
+  "Version":"2012-10-17",
+  "Id":"http referer policy",
+  "Statement":[
+    {
+      "Sid":"Allow get requests originating from www.buteksonline.com and buteksonline.com.",
+      "Effect":"Allow",
+      "Principal":"*",
+      "Action":"s3:GetObject",
+      "Resource":"arn:aws:s3:::<bucketname>/*",
+      "Condition":{
+        "StringLike":{
+		"aws:Referer":[
+		    "http://www.domain.com/*",
+		    "http://domain.com/*"
+		]
+	 }
+      }
+    }
+  ]
+}
